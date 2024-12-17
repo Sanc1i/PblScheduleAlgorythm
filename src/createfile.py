@@ -1,15 +1,11 @@
 import os
 from openpyxl import Workbook
+import constants
 
-FOLDER_NAME = "schedules"
-
-current_folder = os.path.dirname(__file__)  # Folder where the script is located
-schedule_folder = os.path.join(current_folder, "..", FOLDER_NAME)  # Go one level up and into "schedule"
-
-days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-class_times = ["8:15 - 10:00", "10:15 - 12:00", "12:15 - 14:00", "14:15 - 16:00", "16:15 - 18:00", "18:15 - 20:00"]
 
 def createFile(name = str, amount_of_sheets = int):
+    current_folder = os.path.dirname(__file__)
+    schedule_folder = os.path.join(current_folder, "..", constants.FOLDER_NAME)
     if not os.path.exists(schedule_folder):
         os.makedirs(schedule_folder)
     wb = Workbook()
@@ -25,7 +21,6 @@ def createFile(name = str, amount_of_sheets = int):
         new_sheet = wb.create_sheet(title=sheet_name)
         createSchedule(new_sheet)
 
-    # Save the workbook in the "schedule" folder
     file_path = os.path.join(schedule_folder, name + ".xlsx")
     wb.save(file_path)
 
@@ -33,8 +28,8 @@ def createFile(name = str, amount_of_sheets = int):
 
 
 def createSchedule(sheet):
-        for col, day in enumerate(days, start=2):
+        for col, day in enumerate(constants.DAYS, start=2):
             sheet.cell(row=1, column=col, value=day)
 
-        for row, time in enumerate(class_times, start=2):
+        for row, time in enumerate(constants.CLASS_TIMES, start=2):
             sheet.cell(row=row, column=1, value=time)
