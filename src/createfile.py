@@ -1,11 +1,11 @@
 import os
 from openpyxl import Workbook
-import constants
+from .constants import *
 
 
 def createFile(name = str, amount_of_sheets = int):
     current_folder = os.path.dirname(__file__)
-    schedule_folder = os.path.join(current_folder, "..", constants.FOLDER_NAME)
+    schedule_folder = os.path.join(current_folder, "..", FOLDER_NAME)
     if not os.path.exists(schedule_folder):
         os.makedirs(schedule_folder)
     wb = Workbook()
@@ -28,8 +28,8 @@ def createFile(name = str, amount_of_sheets = int):
 
 
 def createSchedule(sheet):
-        for col, day in enumerate(constants.DAYS, start=2):
+        for col, day in enumerate(DAYS, start=2):
             sheet.cell(row=1, column=col, value=day)
 
-        for row, time in enumerate(constants.CLASS_TIMES, start=2):
+        for row, time in enumerate(CLASS_TIMES, start=2):
             sheet.cell(row=row, column=1, value=time)
