@@ -3,7 +3,7 @@ from openpyxl import Workbook
 from .constants import *
 
 
-def createFile(name = str, amount_of_sheets = int):
+def createFile(name = str, number = int, namesSchedules = [], idx = []):
     current_folder = os.path.dirname(__file__)
     schedule_folder = os.path.join(current_folder, "..", FOLDER_NAME)
     if not os.path.exists(schedule_folder):
@@ -12,12 +12,11 @@ def createFile(name = str, amount_of_sheets = int):
 
     default_sheet = wb.active
     default_sheet.title = "Schedule_1"
-
     createSchedule(default_sheet)
 
-    num_sheets = amount_of_sheets
-    for i in range(2, num_sheets + 1):
-        sheet_name = f"Schedule_{i}"
+    
+    for i in range(2, number + 1):
+        sheet_name = f"Schedule_{namesSchedules}_{idx}"
         new_sheet = wb.create_sheet(title=sheet_name)
         createSchedule(new_sheet)
 
