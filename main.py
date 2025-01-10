@@ -9,10 +9,11 @@ def generate(args):
     rooms = getdata.get_sheet_data_as_tuples("Rooms")
     tutors = getdata.get_sheet_data_as_tuples("Tutors")
 
-    names = extract.extract_all(faculty, rooms, tutors)
+    names = extract.extract_all(groups, rooms, tutors)
     
     createfile.createFile(args.generate, names)
-    fcfs.fcfs_schedule_with_requirements(createfile.get_file_path(args.generate), tutors, rooms, subjects, faculty)
+    absents.mark_tutor_absence(createfile.get_file_path(args.generate), tutors)
+    fcfs.fcfs_schedule_with_requirements(createfile.get_file_path(args.generate), tutors, rooms, subjects, groups, faculty)
 
 def main():
     parser = argparse.ArgumentParser(description="Schedule generator")

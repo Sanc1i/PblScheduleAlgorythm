@@ -24,11 +24,8 @@ def fill_cell(sheet, cell_address, text_to_fill):
         text_to_fill (str): Text to fill if the cell is empty.
     """
     cell = sheet[cell_address]
-    if cell.value is None:
-        cell.value = text_to_fill
-        print(f"Cell {cell_address} was empty. Filled with: '{text_to_fill}'")
-    else:
-        print(f"Cell {cell_address} already contains data: '{cell.value}'")
+    cell.value = text_to_fill
+        
 
 # Example usage:
 # if not is_cell_occupied("example.xlsx", "Sheet1", "B2"):

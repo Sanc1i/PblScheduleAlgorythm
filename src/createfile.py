@@ -15,7 +15,7 @@ def createFile(file_name = str, namesSchedules = []): #,idx = []):
     # default_sheet.title = "Schedule_1"
     # createSchedule(default_sheet)
     
-    for name in (namesSchedules):
+    for name in namesSchedules:
         sheet_name = f"Schedule_{name}"#_{idx}"
         new_sheet = wb.create_sheet(title=sheet_name)
         createSchedule(new_sheet)

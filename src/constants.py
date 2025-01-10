@@ -1,3 +1,3 @@
 FOLDER_NAME = "schedules"
-DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-CLASS_TIMES = ["8:15 - 10:00", "10:15 - 12:00", "12:15 - 14:00", "14:15 - 16:00", "16:15 - 18:00", "18:15 - 20:00"]
+DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] #"Saturday", "Sunday"]
+CLASS_TIMES = ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"]
