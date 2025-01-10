@@ -1,4 +1,6 @@
 from openpyxl import load_workbook
+import re
+
 
 def is_cell_occupied(sheet, cell_address):
     """
@@ -16,15 +18,27 @@ def is_cell_occupied(sheet, cell_address):
 
 def fill_cell(sheet, cell_address, text_to_fill):
     """
-    Fill a cell in an Excel sheet with provided text if it is empty.
+    Fill a cell in an Excel sheet with provided text. If the cell already contains similar content,
+    merge the group numbers instead of overwriting.
     
     Args:
         sheet (Worksheet): An openpyxl worksheet object.
         cell_address (str): Cell address (e.g., "A1") to fill.
-        text_to_fill (str): Text to fill if the cell is empty.
+        text_to_fill (str): Text to fill or merge with existing content.
     """
     cell = sheet[cell_address]
-    cell.value = text_to_fill
+    if cell.value is None:
+        cell.value = text_to_fill
+    else:
+        existing_text = str(cell.value)
+        # Extract group numbers from both existing text and new text
+        existing_groups = set(re.findall(r'Group (\d+)', existing_text))
+        new_groups = set(re.findall(r'Group (\d+)', text_to_fill))
+        merged_groups = sorted(existing_groups.union(new_groups), key=int)
+        merged_group_text = f"Group {'-'.join(merged_groups)}"
+        # Replace the old group part with the merged group text
+        updated_text = re.sub(r'Group [\d\-]+', merged_group_text, existing_text)
+        cell.value = updated_text
         
 
 # Example usage:
